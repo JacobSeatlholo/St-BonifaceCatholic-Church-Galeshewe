@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* shadcn compatibility tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* ── St Boniface brand palette ──────────────────────────────
+     Derived from the centenary poster (deep purple / gold)
+     and the parish emblem (parchment, ochre, sapphire line) */
+  --color-parchment: #f7f2e9;
+  --color-parchment-deep: #efe7d6;
+  --color-cream: #fdfaf4;
+  --color-ink: #2a231c;
+  --color-royal: #3b2565;
+  --color-royal-deep: #241741;
+  --color-royal-soft: #513a7d;
+  --color-gold: #b8892e;
+  --color-gold-bright: #d9ae56;
+  --color-stonewarm: #6f6557;
+  --color-sapphire: #2c4a8a;
+
+  /* Typography */
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --background: #f7f2e9;
+  --foreground: #2a231c;
+  --border: #e4dac5;
+  --ring: #b8892e;
+  --input: #e4dac5;
+  --primary: #3b2565;
+  --primary-foreground: #f7f2e9;
+  --secondary: #efe7d6;
+  --secondary-foreground: #3b2565;
+  --muted: #efe7d6;
+  --muted-foreground: #6f6557;
+  --accent: #b8892e;
+  --accent-foreground: #fdfaf4;
+  --destructive: #b3403a;
+  --card: #fdfaf4;
+  --card-foreground: #2a231c;
+  --popover: #fdfaf4;
+  --popover-foreground: #2a231c;
+  --radius: 0.375rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #b8892e;
+  color: #fdfaf4;
+}
+
+/* Small-caps section label */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Liturgical drop cap for the story */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3.4em;
+  line-height: 0.78;
+  float: left;
+  margin: 0.1em 0.14em 0 0;
+  color: var(--color-royal);
+}
+
+@keyframes fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Subtle paper grain for light sections */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Fine gold hairline rule */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(184, 137, 46, 0.55),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
