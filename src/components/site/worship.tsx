@@ -1,19 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import { Reveal } from "./reveal";
-import { MASS_TIMES, SACRAMENTS } from "@/lib/site";
+import { useT } from "./language";
 
 export function Worship() {
+  const { t } = useT();
+  const { worship } = t;
+
   return (
     <section id="worship" className="grain scroll-mt-20 bg-cream">
       <div className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow text-gold">Worship with us</p>
+          <p className="eyebrow text-gold">{worship.eyebrow}</p>
           <h2 className="mt-4 font-display text-4xl font-semibold text-royal md:text-5xl">
-            Mass times &amp; sacraments
+            {worship.title}
           </h2>
           <p className="mt-5 text-[0.95rem] leading-relaxed text-stonewarm">
-            The centre of our life together is the altar. Whatever week you have
-            had, there is a place set for you at the Lord&apos;s table.
+            {worship.intro}
           </p>
         </Reveal>
 
@@ -23,11 +27,11 @@ export function Worship() {
             <div className="overflow-hidden rounded-sm border border-border bg-parchment shadow-sm">
               <div className="border-b border-gold/30 bg-royal-deep px-6 py-4">
                 <p className="font-display text-lg font-semibold text-cream">
-                  The week at St Boniface
+                  {worship.weekTitle}
                 </p>
               </div>
               <ul>
-                {MASS_TIMES.map((m) => (
+                {worship.massTimes.map((m) => (
                   <li
                     key={m.day}
                     className="flex items-baseline justify-between gap-4 border-b border-border/70 px-6 py-4 last:border-b-0"
@@ -47,8 +51,7 @@ export function Worship() {
                 ))}
               </ul>
               <p className="border-t border-gold/30 bg-parchment-deep/60 px-6 py-3 text-[0.72rem] leading-relaxed text-stonewarm">
-                Times may change on feast days and public holidays — please
-                confirm with the parish office.
+                {worship.scheduleNote}
               </p>
             </div>
           </Reveal>
@@ -59,16 +62,16 @@ export function Worship() {
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm shadow-xl shadow-royal/15 sm:aspect-[3/2] lg:aspect-[4/5]">
                 <Image
                   src="/images/worship-ambo.jpg"
-                  alt="The Word proclaimed at the ambo of the Chi-Rho, altar servers standing alongside"
+                  alt={worship.amboAlt}
                   fill
                   sizes="(min-width: 1024px) 46vw, 100vw"
                   className="object-cover"
                 />
               </div>
               <figcaption className="mt-3 flex items-center justify-between gap-4 text-xs tracking-wide text-stonewarm">
-                <span>The Word proclaimed at the ambo of the Chi-Rho</span>
+                <span>{worship.amboCaption}</span>
                 <span className="font-display text-sm italic text-gold">
-                  “Your word is a lamp for my steps”
+                  {worship.verse}
                 </span>
               </figcaption>
             </figure>
@@ -78,13 +81,13 @@ export function Worship() {
         {/* Sacraments */}
         <div className="mt-20">
           <Reveal className="text-center">
-            <p className="eyebrow text-gold">The sacraments</p>
+            <p className="eyebrow text-gold">{worship.sacEyebrow}</p>
             <h3 className="mt-3 font-display text-3xl font-semibold text-royal md:text-4xl">
-              Christ meeting us at every stage of life
+              {worship.sacTitle}
             </h3>
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {SACRAMENTS.map((s, i) => (
+            {worship.sacraments.map((s, i) => (
               <Reveal key={s.title} delay={(i % 3) * 110}>
                 <div className="group h-full rounded-sm border border-border bg-parchment p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-lg hover:shadow-royal/10">
                   <p className="font-display text-[0.7rem] font-semibold tracking-[0.3em] text-gold/70 transition-colors group-hover:text-gold">
@@ -102,8 +105,7 @@ export function Worship() {
           </div>
           <Reveal>
             <p className="mx-auto mt-8 max-w-xl text-center text-xs leading-relaxed text-stonewarm">
-              To arrange any of the sacraments, please contact the parish
-              office. For the sick and housebound, a priest will gladly visit.
+              {worship.sacNote}
             </p>
           </Reveal>
         </div>

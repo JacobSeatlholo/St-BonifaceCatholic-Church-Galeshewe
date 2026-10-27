@@ -36,7 +36,7 @@ Requires Node.js 20 or newer.
 
 ## Editing parish information
 
-Almost everything a parish needs to update lives in **one file**:
+Parish facts live in **one file**:
 
 ```
 src/lib/site.ts
@@ -45,14 +45,31 @@ src/lib/site.ts
 It contains, clearly labelled:
 
 - **Contact details** — address, phone, email, office hours, directions link
-- **Mass times** — the weekly schedule
-- **Sacraments and ministries** — names and descriptions
-- **Gallery** — photos and captions
 - **Leadership** — bishop and parish priest
+- **Gallery image paths** — which photos appear, in what order
 
-> **Important:** Mass times, office hours and the Monday communion service are currently
-> marked `PLACEHOLDER` and must be confirmed with the parish office before the site goes
-> live. Search the file for `PLACEHOLDER`.
+> **Important:** Mass times and office hours are currently marked `PLACEHOLDER` and must
+> be confirmed with the parish office before the site goes live. Search for `PLACEHOLDER`.
+
+## Three languages
+
+The site speaks **English, Setswana and Afrikaans**. A switcher sits in the navbar
+(desktop) and in the mobile menu; the visitor's choice is remembered on their device.
+
+Every sentence on the page — headings, Mass times, sacraments, photo captions, even
+the alt text — lives in one dictionary file:
+
+```
+src/lib/i18n.ts
+```
+
+It is organised in three blocks: `en`, `tn` (Setswana) and `af` (Afrikaans). To correct
+a translation, find the wording in the block and edit it; the three blocks mirror each
+other line for line.
+
+> **Note:** the Setswana and Afrikaans wording was written with care but should be
+> reviewed by a first-language speaker of the parish before launch. Parish-specific
+> terms ("Misa", "Kolobetso", "Vormsel"…) follow common South African Catholic usage.
 
 ### Replacing photographs
 
@@ -65,6 +82,11 @@ updates itself. Current photos were taken at the centenary Thanksgiving Mass,
 The emblem (St Boniface blessing two children, drawn in a single blue line) appears
 in the navbar, the story section and the footer, and is cropped from the official
 parish artwork. `public/images/logo-light.jpg` is the full emblem with wordmark.
+
+## Credits
+
+- Photographs, emblem and centenary poster © St Boniface Catholic Church, Galeshewe
+- Demo website built by [BusinessHustle](https://businesshustle.co.za)
 
 ## Tech notes
 
@@ -79,5 +101,4 @@ parish artwork. `public/images/logo-light.jpg` is the full emblem with wordmark.
 
 ## Repository
 
-Maintained for the parish of St Boniface, Galeshewe. Photographs and the parish emblem
-© St Boniface Catholic Church, Galeshewe.
+Maintained for the parish of St Boniface, Galeshewe.

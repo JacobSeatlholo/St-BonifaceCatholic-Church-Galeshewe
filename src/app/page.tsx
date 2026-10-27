@@ -1,3 +1,4 @@
+import { LanguageProvider } from "@/components/site/language";
 import { Navbar } from "@/components/site/navbar";
 import { Hero } from "@/components/site/hero";
 import { Welcome } from "@/components/site/welcome";
@@ -13,7 +14,8 @@ import { Footer } from "@/components/site/footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-parchment text-ink">
+    <LanguageProvider>
+      <div className="flex min-h-screen flex-col bg-parchment text-ink">
       <Navbar />
       <main className="flex-1">
         <Hero />
@@ -28,6 +30,7 @@ export default function Home() {
         <Visit />
       </main>
       <Footer />
-    </div>
+      </div>
+    </LanguageProvider>
   );
 }

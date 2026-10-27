@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { NAV_LINKS } from "@/lib/site";
+import { LanguageSwitcher, useT } from "./language";
+import { PARISH } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const { t } = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -75,23 +77,26 @@ export function Navbar() {
               </span>
               <span
                 className={cn(
-                  "block text-[0.6rem] uppercase tracking-[0.22em] transition-colors",
+                  "block whitespace-nowrap text-[0.6rem] uppercase tracking-[0.22em] transition-colors",
                   scrolled ? "text-stonewarm" : "text-cream/70"
                 )}
               >
-                Catholic Church · Galeshewe
+                {t.nav.subtitle}
               </span>
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
-            {NAV_LINKS.map((l) => (
+          <nav
+            className="hidden items-center gap-3.5 xl:gap-4 2xl:gap-5 xl:flex"
+            aria-label={t.nav.navLabel}
+          >
+            {t.nav.links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 className={cn(
-                  "text-[0.8rem] font-medium tracking-wide transition-colors hover:text-gold-bright",
+                  "whitespace-nowrap text-[0.74rem] font-medium transition-colors hover:text-gold-bright",
                   scrolled
                     ? "text-ink/80 hover:text-gold"
                     : "text-cream/85 hover:text-gold-bright"
@@ -100,16 +105,17 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
+            <LanguageSwitcher tone={scrolled ? "dark" : "light"} />
             <Link
               href="#worship"
               className={cn(
-                "rounded-sm px-4 py-2 text-[0.8rem] font-semibold tracking-wide transition-all",
+                "whitespace-nowrap rounded-sm px-4 py-2 text-[0.74rem] font-semibold transition-all",
                 scrolled
                   ? "bg-royal text-parchment hover:bg-royal-deep"
                   : "bg-gold text-royal-deep hover:bg-gold-bright"
               )}
             >
-              Join us for Mass
+              {t.nav.join}
             </Link>
           </nav>
 
@@ -118,12 +124,12 @@ export function Navbar() {
             type="button"
             onClick={() => setOpen(true)}
             className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-sm transition-colors lg:hidden",
+              "flex h-11 w-11 items-center justify-center rounded-sm transition-colors xl:hidden",
               scrolled
                 ? "text-royal hover:bg-royal/5"
                 : "text-cream hover:bg-cream/10"
             )}
-            aria-label="Open menu"
+            aria-label={t.nav.openMenu}
             aria-expanded={open}
           >
             <Menu className="h-6 w-6" strokeWidth={1.5} />
@@ -134,14 +140,14 @@ export function Navbar() {
       {/* Mobile overlay menu */}
       <div
         className={cn(
-          "fixed inset-0 z-50 flex flex-col bg-royal-deep transition-all duration-500 lg:hidden",
+          "fixed inset-0 z-50 flex flex-col bg-royal-deep transition-all duration-500 xl:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         )}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label={t.nav.menuLabel}
       >
         <div className="flex h-16 items-center justify-between px-5">
           <span className="font-display text-xl font-semibold text-cream">
@@ -151,13 +157,13 @@ export function Navbar() {
             type="button"
             onClick={() => setOpen(false)}
             className="flex h-11 w-11 items-center justify-center rounded-sm text-cream hover:bg-cream/10"
-            aria-label="Close menu"
+            aria-label={t.nav.closeMenu}
           >
             <X className="h-6 w-6" strokeWidth={1.5} />
           </button>
         </div>
         <nav className="flex flex-1 flex-col justify-center gap-2 px-8" aria-label="Mobile">
-          {NAV_LINKS.map((l, i) => (
+          {t.nav.links.map((l, i) => (
             <Link
               key={l.href}
               href={l.href}
@@ -172,9 +178,16 @@ export function Navbar() {
             </Link>
           ))}
         </nav>
+        <div className="flex items-center justify-between gap-4 px-8 pb-6">
+          <LanguageSwitcher tone="light" />
+          <p className="text-right text-sm text-cream/60">
+            {PARISH.address.line2}, {PARISH.address.city}
+          </p>
+        </div>
         <div className="px-8 pb-10 text-sm text-cream/60">
-          <p>3–5 Caritas Road, Galeshewe, Kimberley</p>
-          <p className="mt-1">+27 53 831 4411 · All are welcome</p>
+          <p className="mt-1">
+            {PARISH.phone} · {t.nav.welcomeNote}
+          </p>
         </div>
       </div>
     </>

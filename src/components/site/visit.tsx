@@ -1,8 +1,14 @@
+"use client";
+
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "./reveal";
+import { useT } from "./language";
 import { PARISH } from "@/lib/site";
 
 export function Visit() {
+  const { t } = useT();
+  const { visit } = t;
+
   return (
     <section id="visit" className="grain scroll-mt-20 bg-cream">
       <div className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
@@ -10,14 +16,12 @@ export function Visit() {
           {/* Details */}
           <div>
             <Reveal>
-              <p className="eyebrow text-gold">Find us</p>
+              <p className="eyebrow text-gold">{visit.eyebrow}</p>
               <h2 className="mt-4 font-display text-4xl font-semibold text-royal md:text-5xl">
-                Come and see.
+                {visit.title}
               </h2>
               <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-stonewarm">
-                The parish is easy to find in the heart of Galeshewe. Ring the
-                office, write to us, or simply walk through the door on Sunday —
-                the welcome is the same either way.
+                {visit.intro}
               </p>
             </Reveal>
 
@@ -45,7 +49,9 @@ export function Visit() {
                     <Phone className="h-4.5 w-4.5" strokeWidth={1.75} />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-ink">Parish office</p>
+                    <p className="text-sm font-semibold text-ink">
+                      {visit.officeLabel}
+                    </p>
                     <a
                       href={PARISH.phoneHref}
                       className="text-sm text-stonewarm transition-colors hover:text-gold"
@@ -59,7 +65,9 @@ export function Visit() {
                     <Mail className="h-4.5 w-4.5" strokeWidth={1.75} />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-ink">Email</p>
+                    <p className="text-sm font-semibold text-ink">
+                      {visit.emailLabel}
+                    </p>
                     <a
                       href={`mailto:${PARISH.email}`}
                       className="text-sm text-stonewarm transition-colors hover:text-gold"
@@ -73,7 +81,9 @@ export function Visit() {
                     <Clock className="h-4.5 w-4.5" strokeWidth={1.75} />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-ink">Office hours</p>
+                    <p className="text-sm font-semibold text-ink">
+                      {visit.hoursLabel}
+                    </p>
                     <p className="text-sm text-stonewarm">{PARISH.officeHours}</p>
                   </div>
                 </li>
@@ -88,13 +98,13 @@ export function Visit() {
                   rel="noopener noreferrer"
                   className="rounded-sm bg-royal px-7 py-3.5 text-sm font-semibold tracking-wide text-parchment transition-all hover:-translate-y-0.5 hover:bg-royal-deep"
                 >
-                  Get directions
+                  {visit.directionsBtn}
                 </a>
                 <a
                   href={`mailto:${PARISH.email}`}
                   className="rounded-sm border border-royal/30 px-7 py-3.5 text-sm font-semibold tracking-wide text-royal transition-all hover:border-gold hover:text-gold"
                 >
-                  Email the parish
+                  {visit.emailBtn}
                 </a>
               </div>
             </Reveal>
@@ -104,29 +114,28 @@ export function Visit() {
           <Reveal delay={140}>
             <div className="flex h-full flex-col justify-between overflow-hidden rounded-sm bg-royal-deep p-8 text-cream shadow-xl shadow-royal/25 md:p-10">
               <div>
-                <p className="eyebrow text-gold-bright">This Sunday</p>
+                <p className="eyebrow text-gold-bright">{visit.sundayEyebrow}</p>
                 <p className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
-                  Mass at 08:00
+                  {visit.sundayMassA}
                   <span className="mx-3 text-gold-bright">&amp;</span>
-                  10:00
+                  {visit.sundayMassB}
                 </p>
                 <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
                   {PARISH.address.line1}, {PARISH.address.line2},{" "}
-                  {PARISH.address.city}. Parking on the grounds — arrive a few
-                  minutes early and settle in.
+                  {PARISH.address.city}. {visit.parkingNote}
                 </p>
               </div>
               <div className="mt-10 border-t border-cream/15 pt-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-cream/50">
-                  A parish of the {PARISH.diocese}
+                  {visit.dioceseLine}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-cream/75">
-                  Under the leadership of {PARISH.bishop}.
+                  {visit.leaderLine} {PARISH.bishop}.
                   <br />
-                  Parish priest: {PARISH.parishPriest}.
+                  {visit.priestLabel} {PARISH.parishPriest}
                 </p>
                 <p className="mt-5 font-display text-lg italic text-gold-bright">
-                  “I was a stranger and you welcomed me.”
+                  {visit.quote}
                 </p>
               </div>
             </div>
