@@ -1,0 +1,1 @@
+# St-BonifaceCatholic-Church-Galeshewe
